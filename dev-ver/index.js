@@ -69,7 +69,7 @@ window.addEventListener( 'resize', onWindowResize );
 //controls
 const controls = new OrbitControls(camera, canvas)
 controls.enableDamping = false
-controls.enablePan = true
+controls.enablePan = false
 controls.enableRotate = true
 controls.enableZoom = false
 controls.mouseButtons = {
