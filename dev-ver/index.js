@@ -15,10 +15,10 @@ const gui = new GUI()  //enable this to use dat gui
 const cubeFolder = gui.addFolder("Cube") //creates a folder in the dat gui
 
 const loader = new GLTFLoader() // loades the gltf folder
-loader.load('model/land_center.glb', function(gltf){
+loader.load('model/website.glb', function(gltf){
     console.log(gltf)
     const root = gltf.scene
-    root.rotation.x = 1.5
+    // root.rotation.x = 1.5
     scene.add(root)
 },function(xhr){
     console.log((xhr.loaded/xhr.total*100)+"% loaded")
@@ -26,18 +26,18 @@ loader.load('model/land_center.glb', function(gltf){
     console.log('An Error Occured')
 })
 
-const geometry = new THREE.BoxGeometry(1,1,1) //creating a cube
-const material = new THREE.MeshBasicMaterial({ //assigning  a material
-    color: 'blue'
-})
-const boxMesh = new THREE.Mesh(geometry,material) //combining the cube and material
-scene.add(boxMesh) //adding cube to scene
-cubeFolder.add(boxMesh.position,"x",-50,50,0.1).name("X-Position")
-cubeFolder.add(boxMesh.position,"y",-50,50,0.1).name("Y-Position")
-cubeFolder.add(boxMesh.position,"z",-50,50,0.1).name("Z-Position")
+// const geometry = new THREE.BoxGeometry(1,1,1) //creating a cube
+// const material = new THREE.MeshBasicMaterial({ //assigning  a material
+//     color: 'blue'
+// })
+// const boxMesh = new THREE.Mesh(geometry,material) //combining the cube and material
+// scene.add(boxMesh) //adding cube to scene
+// cubeFolder.add(boxMesh.position,"x",-50,50,0.1).name("X-Position")
+// cubeFolder.add(boxMesh.position,"y",-50,50,0.1).name("Y-Position")
+// cubeFolder.add(boxMesh.position,"z",-50,50,0.1).name("Z-Position")
 
 //lights
-const light = new THREE.DirectionalLight(0xffffff,10)
+const light = new THREE.DirectionalLight(0xffffff,1)
 light.position.set(2,2,5)
 light.castShadow = true;
 scene.add(light)
@@ -50,13 +50,16 @@ const sizes = {
 
 //camera
 const camera = new THREE.PerspectiveCamera(75, sizes.width/sizes.height,0.1,100)
-camera.position.set(1.2,0,3)
+camera.position.set(1.2,4.5,5.6)
 scene.add(camera)
+cubeFolder.add(camera.position,"x",-50,50,0.1).name("X-POSITION")
+cubeFolder.add(camera.position,"y",-50,50,0.1).name("Y-POSITION")
+cubeFolder.add(camera.position,"z",-50,50,0.1).name("Z-POSITION")
 
 //rendere
 const renderer = new THREE.WebGLRenderer({
     canvas: canvas,
-    alpha: false
+    alpha: true
 }) 
 
 //stats
@@ -69,9 +72,9 @@ window.addEventListener( 'resize', onWindowResize );
 //controls
 const controls = new OrbitControls(camera, canvas)
 controls.enableDamping = false
-controls.enablePan = false
+controls.enablePan = true
 controls.enableRotate = true
-controls.enableZoom = false
+controls.enableZoom = true
 controls.mouseButtons = {
 	LEFT: THREE.MOUSE.ROTATE,
 	MIDDLE: THREE.MOUSE.DOLLY,
@@ -89,7 +92,7 @@ renderer.gammaOutput = true
 
 function animate(){
     requestAnimationFrame(animate)
-    boxMesh.rotation.y += 0.01
+    // boxMesh.rotation.y += 0.01
     stats.update()
     render()
 }
