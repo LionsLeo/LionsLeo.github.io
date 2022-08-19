@@ -4,12 +4,13 @@ import {GUI} from './three.js-dev/dat.gui.module.js'
 import {OrbitControls} from './three.js-dev/examples/jsm/controls/OrbitControls.js'
 import Stats from './three.js-dev/examples/jsm/libs/stats.module.js'
 
+
 //accessing the canvas and div element from index.html
 const canvas = document.querySelector('.webgl')
 const mybody = document.querySelector('.my-canvas')
 const scene = new THREE.Scene() //creating a threejs scene
 
-scene.add( new THREE.AxesHelper(500)) //shows the 3d axis in the canvas
+// scene.add( new THREE.AxesHelper(500)) //shows the 3d axis in the canvas
 
 const gui = new GUI()  //enable this to use dat gui
 const cubeFolder = gui.addFolder("Cube") //creates a folder in the dat gui
@@ -37,10 +38,20 @@ loader.load('model/website.glb', function(gltf){
 // cubeFolder.add(boxMesh.position,"z",-50,50,0.1).name("Z-Position")
 
 //lights
-const light = new THREE.DirectionalLight(0xffffff,1)
-light.position.set(2,2,5)
-light.castShadow = true;
-scene.add(light)
+// const light = new THREE.DirectionalLight(0xffffff,1)
+// light.position.set(2,2,5)
+// light.castShadow = true;
+// scene.add(light)
+const width = 10;
+const height = 10;
+const intensity = 5;
+const rectLight = new THREE.RectAreaLight( 0xffffff, intensity,  width, height );
+rectLight.position.set( 0, 20, 0 );
+rectLight.lookAt( 0, 0, 0 );
+scene.add( rectLight )
+
+// var rectLightHelper = new RectAreaLightHelper( rectLight );
+// rectLight.add( rectLightHelper );
 
 //sizes
 const sizes = {
@@ -50,11 +61,15 @@ const sizes = {
 
 //camera
 const camera = new THREE.PerspectiveCamera(75, sizes.width/sizes.height,0.1,100)
-camera.position.set(1.2,4.5,5.6)
+camera.position.set(2.5,2.8,2.7)
 scene.add(camera)
 cubeFolder.add(camera.position,"x",-50,50,0.1).name("X-POSITION")
 cubeFolder.add(camera.position,"y",-50,50,0.1).name("Y-POSITION")
 cubeFolder.add(camera.position,"z",-50,50,0.1).name("Z-POSITION")
+
+cubeFolder.add(camera.rotation,"x",0,360,0.1).name("X-ROTATION")
+cubeFolder.add(camera.rotation,"y",0,360,0.1).name("Y-ROTATION")
+cubeFolder.add(camera.rotation,"z",0,360,0.1).name("Z-ROTATION")
 
 //rendere
 const renderer = new THREE.WebGLRenderer({
