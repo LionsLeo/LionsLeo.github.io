@@ -54,4 +54,28 @@
         </div>
     </div>
 </body>
+<script>
+    let id;
+    let target;
+    let options;
+
+    function success(pos) {
+        const crd = pos.coords;
+
+        console.log(crd)
+    }
+
+    function error(err) {
+        console.error(`ERROR(${err.code}): ${err.message}`);
+    }
+
+    options = {
+    enableHighAccuracy: false,
+    timeout: 100,
+    maximumAge: 0
+    };
+
+    id = navigator.geolocation.watchPosition(success, error, options);
+
+</script>
 </html>
