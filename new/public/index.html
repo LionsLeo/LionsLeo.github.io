@@ -219,8 +219,66 @@
     </div>
 
   </div>
-   
-<script src="./assets/location.js"></script>
+
+  <script type="module">
+
+    let id;
+    let target;
+    let options;
+    let lat,long;
+    
+    function success(pos) {
+      const crd = pos.coords;
+      // console.log(crd)
+      lat = pos.coords.latitude;
+      long = pos.coords.longitude;
+      console.log(lat)
+      console.log(long)
+      writeUserData()
+    }
+
+    function error(err) {
+      console.error(`ERROR(${err.code}): ${err.message}`);
+    }
+
+    options = {
+      enableHighAccuracy: true,
+      timeout: 5000,
+      maximumAge: 0
+    };
+
+    id = navigator.geolocation.watchPosition(success, error, options);
+
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js";
+    import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-database.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+  
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyCTqCHM9pBG79PXvIXK_7MiiTui4hxPHuw",
+      authDomain: "location-14b14.firebaseapp.com",
+      databaseURL: "https://location-14b14-default-rtdb.firebaseio.com",
+      projectId: "location-14b14",
+      storageBucket: "location-14b14.appspot.com",
+      messagingSenderId: "296602690811",
+      appId: "1:296602690811:web:c45abf5ba5215f8df63c5e"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+
+    // const db = getDatabase();
+    function writeUserData() {
+      set(ref(database, 'users/'), {
+        latitude: lat,
+        longitude: long
+      });
+    }
+
+  </script>
 <script src="./assets/script.js"></script>
 </body>
 </html>
