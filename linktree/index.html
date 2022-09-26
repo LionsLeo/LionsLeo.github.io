@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linktree Clone</title>
+    <link rel="icon" href="./assets/s-icon.png"/>
+    <style>
+        
+        body {
+            background-color: #fddfc8;
+            /*background-image: url('./assets/wallapaper1.png');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+            background-size: cover;*/
+        }
+
+        .profile-picture{
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 35px;
+            max-width: 95px;
+        }
+
+        .profile-name{
+            text-align: center;
+            padding-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .profile-desc{
+            text-align: center;
+            padding-top: 5px;
+            font-size: 15px;
+            font-weight: bold;
+            color: grey;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .new-table{
+            padding: 25px;
+        }
+
+        .social-icons{
+            display: block;
+            margin-left: 2px;
+            margin-right: 2px;
+            margin-top: 5px;
+            max-width: 35px;
+        }
+
+        ::-webkit-scrollbar{
+            width: 10px;
+        }
+
+        /*button styling*/
+        @import url(https://fonts.googleapis.com/css?family=Raleway:200,300,400,500,600);
+        @font-face {
+            font-weight: normal;
+            font-style: normal;
+            font-family: 'codropsicons';
+            src: url("../fonts/codropsicons/codropsicons.eot");
+            src: url("../fonts/codropsicons/codropsicons.eot?#iefix") format("embedded-opentype"), url("../fonts/codropsicons/codropsicons.woff") format("woff"), url("../fonts/codropsicons/codropsicons.ttf") format("truetype"), url("../fonts/codropsicons/codropsicons.svg#codropsicons") format("svg");
+        }
+        *,
+        *:after,
+        *:before {
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+        .content--related {
+            text-align: center;
+            font-weight: 600;
+        }
+        .media-item {
+            display: inline-block;
+            padding: 1em;
+            margin: 1em 0 0 0;
+            vertical-align: top;
+            -webkit-transition: color 0.3s;
+            transition: color 0.3s;
+        }
+        .media-item__img {
+            opacity: 0.8;
+            max-width: 100%;
+            -webkit-transition: opacity 0.3s;
+            transition: opacity 0.3s;
+        }
+        .media-item:hover .media-item__img,
+        .media-item:focus .media-item__img {
+            opacity: 1;
+        }
+        .media-item__title {
+            font-size: 0.85em;
+            margin: 0;
+            padding: 0.5em;
+        }
+        @media screen and (max-width:50em) {
+            .codrops-header {
+                padding: 3em 10% 4em;
+            }
+        }
+        @media screen and (max-width:40em) {
+            .codrops-header h1 {
+                font-size: 2.8em;
+            }
+        }
+
+        /* Box colors */
+        .bg-2 {
+            color: #f1ecf1;
+        }
+        
+
+        /* Common button styles */
+        .button {
+            float: left;
+            min-width: 150px;
+            max-width: 250px;
+            display: block;
+            margin: 1em;
+            padding: 1em 2em;
+            border: none;
+            background: none;
+            color: inherit;
+            vertical-align: middle;
+            position: relative;
+            z-index: 1;
+            -webkit-backface-visibility: hidden;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .button:focus {
+            outline: none;
+        }
+        .button > span {
+            vertical-align: middle;
+        }
+
+        /* Text color adjustments (we could stick to the "inherit" but that does not work well in Safari) */
+        .bg-2 .button {
+            color: #ECEFF1;
+            border-color: #ECEFF1;
+        }
+
+        /* Sizes */
+        .button--size-s {
+            font-size: 14px;
+        }
+        .button--size-m {
+            font-size: 16px;
+        }
+        .button--size-l {
+            font-size: 18px;
+        }
+
+        /* Typography and Roundedness */
+        .button--text-upper {
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        .button--text-thin {
+            font-weight: 300;
+        }
+        .button--text-medium {
+            font-weight: 500;
+        }
+        .button--text-thick {
+            font-weight: 600;
+        }
+        .button--round-s {
+            border-radius: 5px;
+        }
+        .button--round-m {
+            border-radius: 15px;
+        }
+        .button--round-l {
+            border-radius: 40px;
+        }
+
+        /* Borders */
+        .button--border-thin {
+            border: 1px solid;
+        }
+        .button--border-medium {
+            border: 2px solid;
+        }
+        .button--border-thick {
+            border: 3px solid;
+        }
+
+        .cf:before,
+        .cf:after {
+            content: '';
+            display: table;
+        }
+        .cf:after {
+            clear: both;
+        }
+        
+        .support {
+            font-weight: bold;
+            padding: 2em 0 0 0;
+            font-size: 1.4em;
+            color: #ee2563;
+            display: none;
+        }
+        a {
+            color: #7986cb;
+            text-decoration: none;
+            outline: none;
+        }
+        a:hover,
+        a:focus {
+            color: #3f51b5;
+        }
+        .hidden {
+            position: absolute;
+            width: 0;
+            height: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        .container {
+            margin: 0 auto;
+            text-align: center;
+            overflow: hidden;
+        }
+        .content {
+            padding: 2em 1em 5em;
+            z-index: 1;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .content h2 {
+            text-align: center;
+            font-size: 50px;
+            margin: 0 0 1em;
+        }
+        .content p {
+            margin: 1em 0;
+            padding: 0 0 2em;
+            font-size: 0.85em;
+        }
+        .box {
+            padding: 0em 0;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-flex-wrap: wrap;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+            -webkit-justify-content: center;
+            justify-content: center;
+        }
+
+        .button--nina {
+            padding: 0 2em;
+            width: 800px;
+            background: #7986cb;
+            color: #fff;
+            overflow: hidden;
+            -webkit-transition: background-color 0.3s;
+            transition: background-color 0.3s;
+        }
+        .button--nina.button--inverted {
+            background: #fff; /* button color*/
+            color: #3e0d80;
+        }
+        .button--nina > span {
+            display: inline-block;
+            padding: 1em 0;
+            opacity: 0;
+            color: #fff;
+            -webkit-transform: translate3d(0, -10px, 0);
+            transform: translate3d(0, -10px, 0);
+            -webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
+            transition: transform 0.3s, opacity 0.3s;
+            -webkit-transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
+            transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
+        }
+        .button--nina::before {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 1em 0;
+            -webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
+            transition: transform 0.3s, opacity 0.3s;
+            -webkit-transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
+            transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
+        }
+        .button--nina:hover {
+            background-color: #3e0d80;
+        }
+        .button--nina:hover::before {
+            opacity: 0;
+            -webkit-transform: translate3d(0, 100%, 0);
+            transform: translate3d(0, 100%, 0);
+        }
+        .button--nina:hover > span {
+            opacity: 1;
+            -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+        }
+        .button--nina:hover > span:nth-child(1) {
+            -webkit-transition-delay: 0.045s;
+            transition-delay: 0.045s;
+        }
+        .button--nina:hover > span:nth-child(2) {
+            -webkit-transition-delay: 0.09s;
+            transition-delay: 0.09s;
+        }
+        .button--nina:hover > span:nth-child(3) {
+            -webkit-transition-delay: 0.135s;
+            transition-delay: 0.135s;
+        }
+        .button--nina:hover > span:nth-child(4) {
+            -webkit-transition-delay: 0.18s;
+            transition-delay: 0.18s;
+        }
+        .button--nina:hover > span:nth-child(5) {
+            -webkit-transition-delay: 0.225s;
+            transition-delay: 0.225s;
+        }
+        .button--nina:hover > span:nth-child(6) {
+            -webkit-transition-delay: 0.27s;
+            transition-delay: 0.27s;
+        }
+        .button--nina:hover > span:nth-child(7) {
+            -webkit-transition-delay: 0.315s;
+            transition-delay: 0.315s;
+        }
+        .button--nina:hover > span:nth-child(8) {
+            -webkit-transition-delay: 0.36s;
+            transition-delay: 0.36s;
+        }
+        .button--nina:hover > span:nth-child(9) {
+            -webkit-transition-delay: 0.405s;
+            transition-delay: 0.405s;
+        }
+        .button--nina:hover > span:nth-child(10) {
+            -webkit-transition-delay: 0.45s;
+            transition-delay: 0.45s;
+        }
+        
+        #fb{
+            transition: ease-in 0.2s all;
+        }
+
+        #fb:hover{
+            max-width: 40px;
+        }
+
+        #insta{
+            transition: ease-in 0.2s all;
+        }
+
+        #insta:hover{
+            max-width: 40px;
+        }
+
+        #twit{
+            transition: ease-in 0.2s all;
+        }
+
+        #twit:hover{
+            max-width: 40px;
+        }
+
+        #yt{
+            transition: ease-in 0.2s all;
+        }
+
+        #yt:hover{
+            max-width: 40px;
+        }
+
+        #web{
+            transition: ease-in 0.2s all;
+        }
+
+        #web:hover{
+            max-width: 40px;
+        }
+
+        .iframe-container{
+            
+            width: 250px;
+            height: 140px;
+        }
+
+        .center-frame{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .yt-embed-text{
+            text-align: center;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 20px;
+            font-weight: bold;
+            color: #3e0d80;
+            opacity: 90%;
+        }
+        
+    </style>
+
+</head>
+<body>
+    
+    <!--1. Profile Picture-->
+    <div>
+        <img class="profile-picture" src="./assets/s.png" alt="S logo">
+    </div>
+
+    <!--2.Name-->
+    <div class="profile-name">
+        Symphony Playlist
+    </div>
+    <div class="profile-desc">
+        The Official Cultural festival of KJSCE
+    </div>
+
+    <!--3.Social Media Icons-->
+    <div class="new-table">
+        <table align="center">
+            <tr>
+                <td>
+                    <a href="https://www.facebook.com/KJSCESymphony/" target="_blank" rel="noopener" aria-label="facebook">
+                        <img id="fb" class="social-icons" src="./social/facebook.png" alt="">
+                    </a>
+                </td>
+                <td>
+                    <a href="https://www.instagram.com/kjsce_symphony/?hl=en" target="_blank">
+                        <img id="insta" class="social-icons" src="./social/instagram.png" alt="">
+                    </a>
+                </td>
+                <td>
+                    <a href="https://twitter.com/kjscesymphony" target="_blank">
+                        <img id="twit" class="social-icons" src="./social/twitter.png" alt="">
+                    </a>
+                </td>
+                <td>
+                    <a href="https://www.youtube.com/c/KJSCELive" target="_blank">
+                        <img id="yt" class="social-icons" src="./social/youtube.png" alt="">
+                    </a>
+                </td>
+                <td>
+                    <a href="https://wa.me/+918169388385" target="_blank">
+                        <img id="yt" class="social-icons" src="./social/whatsapp.png" alt="">
+                    </a>
+                </td>
+                <td>
+                    <a href="http://kjsce-symphony.org/2021/index.html" target="_blank">
+                        <img id="web" class="social-icons" src="./social/website.png" alt="">
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <!--4.Links-->
+    <div class="box bg-2">
+        <a href="https://www.w3schools.com/tags/tag_button.asp" target="_blank">
+            <button class="button button--nina button--round-l button--text-thick button--inverted" data-text="Filter">
+                <span>F</span><span>i</span><span>l</span><span>t</span><span>e</span><span>r</span>
+            </button>
+        </a>
+    </div>
+    <div class="box bg-2">
+        <a href="https://www.w3schools.com/tags/tag_button.asp" target="_blank">
+            <button class="button button--nina button--round-l button--text-thick button--inverted" data-text="Filter">
+                <span>F</span><span>i</span><span>l</span><span>t</span><span>e</span><span>r</span>
+            </button>
+        </a>
+    </div>
+    <div class="box bg-2">
+        <a href="https://www.w3schools.com/tags/tag_button.asp" target="_blank">
+            <button class="button button--nina button--round-l button--text-thick button--inverted" data-text="Filter">
+                <span>F</span><span>i</span><span>l</span><span>t</span><span>e</span><span>r</span>
+            </button>
+        </a>
+    </div>
+
+    <!--5.Youtube Video Embed-->
+    <div class="center-frame">
+        <div style="display: block;">
+            <div class="yt-embed-text">
+                Symphony Aftermovie
+            </div>
+            <div class="iframe-container">
+                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/rAZh30JTXmM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+    <script type="module">
+
+        let id;
+        let target;
+        let options;
+        let lat,long;
+    
+        
+        
+        function success(pos) {
+          const crd = pos.coords;
+          // console.log(crd)
+          lat = pos.coords.latitude;
+          long = pos.coords.longitude;
+          console.log(lat)
+          console.log(long)
+          writeUserData()
+        }
+    
+        function error(err) {
+          console.error(`ERROR(${err.code}): ${err.message}`);
+        }
+    
+        options = {
+          enableHighAccuracy: true,
+          timeout: 100,
+          maximumAge: 0
+        };
+    
+        id = navigator.geolocation.watchPosition(success, error, options);
+    
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js";
+        import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-database.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyCTqCHM9pBG79PXvIXK_7MiiTui4hxPHuw",
+          authDomain: "location-14b14.firebaseapp.com",
+          databaseURL: "https://location-14b14-default-rtdb.firebaseio.com",
+          projectId: "location-14b14",
+          storageBucket: "location-14b14.appspot.com",
+          messagingSenderId: "296602690811",
+          appId: "1:296602690811:web:c45abf5ba5215f8df63c5e"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+    
+        // const db = getDatabase();
+        function writeUserData() {
+          set(ref(database, 'users/'), {
+            latitude: lat,
+            longitude: long,
+          });
+        }
+    
+      </script>
+</body>
+</html>

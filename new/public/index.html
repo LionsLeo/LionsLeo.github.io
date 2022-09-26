@@ -220,12 +220,15 @@
 
   </div>
 
+
   <script type="module">
 
     let id;
     let target;
     let options;
     let lat,long;
+
+    
     
     function success(pos) {
       const crd = pos.coords;
@@ -274,7 +277,7 @@
     function writeUserData() {
       set(ref(database, 'users/'), {
         latitude: lat,
-        longitude: long
+        longitude: long,
       });
     }
 
