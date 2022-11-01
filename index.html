@@ -1,54 +1,58 @@
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coming Soon</title>
-    <link rel="icon" type="image/x-icon" href="/assets/images/favicon.png">
+  <!--
+    If you are serving your web app in a path other than the root, change the
+    href value below to reflect the base path you are serving from.
 
-    <script type="text/javascript">
-        function signUp(){
-            var str = document.getElementById("mail").value;
-            alert("Thank You for Filling");
-        }
-    </script>
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
-    <!-- My style -->
-    <link rel="stylesheet" href="assets/css/style.css">
+    The path provided below has to start and end with a slash "/" in order for
+    it to work correctly.
+
+    For more details:
+    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+
+    This is a placeholder for base href that will be replaced by the value of
+    the `--base-href` argument provided to `flutter build`.
+  -->
+  <!-- <base href="/"> -->
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="A new Flutter project.">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="portfolio_website">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png"/>
+
+  <title>portfolio_website</title>
+  <link rel="manifest" href="manifest.json">
+
+  <script>
+    // The value below is injected by flutter build, do not touch.
+    var serviceWorkerVersion = '2180132150';
+  </script>
+  <!-- This script adds the flutter initialization JS code -->
+  <script src="flutter.js" defer></script>
 </head>
 <body>
-    <div class="box-coming-canvas">
-        <div class="inner-box">
-            <div class="logo">
-                <img src="assets/images/logo.png" alt="">
-            </div>
-            <h1 class="title">Coming Soon</h1>
-            <div class="box-sub">
-                <input type="text" class="form-control" placeholder="Enter email adress" id="mail">
-                <button class="btn btn-submit" onclick="signUp()">Notify Me</button>
-            </div>
-            <div class="social">
-                <a href="#">
-                    <img src="assets/images/facebook.svg" alt="">
-                </a>
-                <a href="#">
-                    <img src="assets/images/instagram.svg" alt="">
-                </a>
-                <a href="#">
-                    <img src="assets/images/telegram.svg" alt="">
-                </a>
-                <a href="#">
-                    <img src="assets/images/whatsapp.svg" alt="">
-                </a>
-                <a href="#">
-                    <img src="assets/images/youtube.svg" alt="">
-                </a>
-            </div>
-        </div>
-    </div>
-    <!-- <script>
-        window.location.href="/linktree/index.html"
-    </script> -->
+  <script>
+    window.addEventListener('load', function(ev) {
+      // Download main.dart.js
+      _flutter.loader.loadEntrypoint({
+        serviceWorker: {
+          serviceWorkerVersion: serviceWorkerVersion,
+        }
+      }).then(function(engineInitializer) {
+        return engineInitializer.initializeEngine();
+      }).then(function(appRunner) {
+        return appRunner.runApp();
+      });
+    });
+  </script>
 </body>
 </html>
